@@ -66,7 +66,7 @@ def countComments(parsed, obj=None):
 
 def downloadCommentsSection(json_url):
 	data = requests.get(json_url, headers={'User-Agent': 'ripperino/1.0'}).json()
-	with open('temporary.json','wb') as f:
+	with open('temporary.json','w',encoding='utf8') as f:
 		json.dump(data,f)
 
 	parsed = []
@@ -102,6 +102,6 @@ if __name__ == '__main__':
 
 	topic, parsed = downloadCommentsSection(sys.argv[1] + '.json')
 
-	with open('%s.%s-%i.json' % (topic['id'], topic['permalink'].split('/')[-2], int(topic['created'])),'w') as f:
+	with open('%s.%s-%i.json' % (topic['id'], topic['permalink'].split('/')[-2], int(topic['created'])),'w',encoding='utf8') as f:
 		# json.dump([topic, parsed], f, indent=4, separators=(',', ': ')) # pretty print
 		json.dump([topic, parsed], f)
